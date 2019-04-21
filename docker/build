@@ -19,7 +19,7 @@ git archive --format=tar --worktree-attributes $HASH | tar -xf - -C $DIR/app/pac
 # Production Build Steps
 ## (Decision between export-ignore'ing docker/develop command or not)
 cd $DIR/app/packaged
-# ./develop composer install --no-dev
+./develop composer install --no-dev
 
 # If your workflow needs any other building
 # ./develop yarn install
