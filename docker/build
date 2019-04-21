@@ -28,6 +28,12 @@ cd $DIR/app/packaged
 # Get the production .env file
 ## This assumes we're running in Jenkins as user "jenkins"
 # /var/lib/jenkins/.venv/bin/aws/ s3 cp s3://shippingdocker-secrets/env-prod .env
+# Create .env file for testing
+cp .env.example .env
+./develop art key:generate
+sed -i "s/REDIS_HOST=.*/REDIS_HOST=redis/" .env
+sed -i "s/CACHE_DRIVER=.*/CACHE_DRIVER=redis/" .env
+sed -i "s/SESSION_DRIVER=.*/SESSION_DRIVER=redis/" .env
 
 # Build the Docker image with latest code
 cd $DIR/app
@@ -37,6 +43,7 @@ docker build \
 
 docker push localhost:5000/shippingdocker.com/app:latest
 docker push localhost:5000/shippingdocker.com/app:$HASH
+
 # Clean up packaged directory
 cd $DIR/app/packaged
 PWD=$(pwd)
