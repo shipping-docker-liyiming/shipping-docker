@@ -1,7 +1,7 @@
 #!/usr/bin/env_groovy
 
 node('master') {
-  state('say-hello') {
+  stage('say-hello') {
     sh "echo 'hello world'"
   }
 }
