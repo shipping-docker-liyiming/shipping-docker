@@ -39,6 +39,6 @@ docker build \
 cd $DIR/app/packaged
 PWD=$(pwd)
 if [ "$PWD" == "$DIR/app/packaged" ]; then
-  docker run --rm -w /opt -v $(pwd):/opt ubuntu:16.04 bash -c " rm -rf ./* rm -rf ./.* 2> /dev/null ./.git* && rm .env*"
+  docker run --rm -w /opt -v $(pwd):/opt ubuntu:16.04 bash -c " rm -rf ./* ./.git* && rm .env* rm -rf ./.* 2> /dev/null"
   touch .gitkeep
 fi
