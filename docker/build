@@ -32,9 +32,11 @@ cd $DIR/app/packaged
 # Build the Docker image with latest code
 cd $DIR/app
 docker build \
-  -t shippingdocker.com/app:latest \
-  -t shippingdocker.com/app:$HASH .
+  -t localhost:5000/shippingdocker.com/app:latest \
+  -t localhost:5000/shippingdocker.com/app:$HASH .
 
+docker push localhost:5000/shippingdocker.com/app:latest
+docker push localhost:5000/shippingdocker.com/app:$HASH
 # Clean up packaged directory
 cd $DIR/app/packaged
 PWD=$(pwd)
