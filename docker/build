@@ -19,7 +19,7 @@ git archive --format=tar --worktree-attributes $HASH | tar -xf - -C $DIR/app/pac
 # Production Build Steps
 ## (Decision between export-ignore'ing docker/develop command or not)
 cd $DIR/app/packaged
-./develop composer install --no-dev
+# ./develop composer install --no-dev
 
 # If your workflow needs any other building
 # ./develop yarn install
@@ -39,6 +39,7 @@ docker build \
 cd $DIR/app/packaged
 PWD=$(pwd)
 if [ "$PWD" == "$DIR/app/packaged" ]; then
-  docker run --rm -w /opt -v $(pwd):/opt ubuntu:16.04 bash -c " rm -rf ./* ./.git* && rm .env* rm -rf ./.* 2> /dev/null"
-  touch .gitkeep
+  echo "$(pwd)"
+  docker run --rm -w /opt -v $(pwd):/opt ubuntu:16.04 bash -c " rm -rf ./* && rm .env* && rm .git* && rm .editor*"
+  touch $(pwd)/.gitkeep
 fi
